@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 //顺序栈的操作 
-#define MAXSIZE 100
-//定义类型int 
+#define MAXSIZE 8
+#define STACKINCREMENT 10
+#define OK 1 
+#define OVERFLOW -1
+#define ERROR 0
 typedef int ElemType;
+typedef int Status;
+//定义类型int 
 
 //顺序栈定义 
 typedef struct{
@@ -14,9 +19,11 @@ typedef struct{
 
 //初始化
 SqStack initStack(SqStack S){
-	S.base=(SqStack *)malloc(MAXSIZE*sizeof(SqStack));//为顺序栈动态分配一个最大容量为MAXSIZE 
+	//为顺序栈动态分配一个最大容量为MAXSIZE 
+	S.base=(int *)malloc(MAXSIZE*sizeof(int));
 	S.top=S.base;
 	S.stackSize=MAXSIZE;
+	printf("初始化顺序栈完成\n");
 	return S; 
 } 
 //入栈
@@ -26,31 +33,51 @@ SqStack Push(SqStack S){
 		printf("该栈已经满了\n") ;
 		return S;
 	} 
-	printf("请输入进栈的元素/n");
+	printf("请输入进栈的元素\n");
 	scanf("%d",&e);
-	*S.top=e;
-	S.top++;
+	S.top++;*S.top=e;
+	printf("入栈结束-------\n");
 	return S;
 } 
 //出栈
 ElemType Pop(SqStack S){
 	ElemType e;
-	if(S.top=S.base){
+	if(S.top==S.base){
 		printf("该栈已经空了\n") ;
 		return 0;
 	} 
 	e=*S.top ;
-	S.top--;
 	printf("出栈的该元素为%d\n",e);
+	printf("出栈成功\n");
 	return e;
 } 
 
 int main(){
 	SqStack S;
-	scanf("请输入最大容量%d",S.stackSize);
-	S=Push((initStack(S)));
+	ElemType e;
+	S=initStack(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+	S=Push(S);
+
 	while(S.base!=S.top){
 		Pop(S);
+		S.top--;
 	} 
 	return 0;
 }
+
+
+
+
+
+
+
