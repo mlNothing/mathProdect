@@ -35,7 +35,9 @@ SqStack Push(SqStack S){
 	} 
 	printf("请输入进栈的元素\n");
 	scanf("%d",&e);
-	S.top++;*S.top=e;
+	*S.top=e;
+	S.top++;
+	//*S.top++=e;
 	printf("入栈结束-------\n");
 	return S;
 } 
@@ -69,8 +71,8 @@ int main(){
 	S=Push(S);
 
 	while(S.base!=S.top){
+		S.top--;//先移动
 		Pop(S);
-		S.top--;
 	} 
 	return 0;
 }
