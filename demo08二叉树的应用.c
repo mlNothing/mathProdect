@@ -67,6 +67,29 @@ BiTree copyBiTree(BiTree T){
         return A;
     }
 }
+//计算深度
+int depBiTree(BiTree T){
+    int i,j;
+    if (T==NULL)
+    {
+        return 0;
+    }else{
+        i=depBiTree(T->lchild);
+        j=depBiTree(T->rchild);
+        return (i>j?(i+1):(j+1));
+    }
+    
+}
+//计算节点数
+int NodeCount(BiTree T){
+    if (T==NULL)
+    {
+        return 0;
+    }else{
+        return NodeCount(T->lchild)+NodeCount(T->rchild)+1;
+    }
+    
+}
 int main(){
     BiTree T,A=NULL;
     T=createBiTree(T);
@@ -76,5 +99,11 @@ int main(){
     printf("\n");
     printf("复制二叉树成功\n");
     frontOrder(A);
+    //I=深度 j=结点数
+    int i,j;
+    i=depBiTree(T);
+    printf("该树的深度为%d\n",i);
+    j=NodeCount(T);
+    printf("该树有%d个结点\n",j);
     return 0;
 }
