@@ -69,7 +69,8 @@ bool QueueEmptry(sqQueue *S){
 void LevelOrder(BiTree T){
     sqQueue S; 
     //初始化队列
-    initSq(&S);
+    initSq(&S);//如果只是传S的，是在栈区创建的，当方法销毁时，S的指针并不会移动，当传入地址的时候，S的地址才会改变 
+    //*p=&S==>P=&S; p指定s的地址 修改p可以直接修改s的值
     enQueue(&S,T);//根结点进入队列
     while (!QueueEmptry(&S))
     {   BiTree P;
