@@ -1,49 +1,61 @@
-#define MAXSIZE 20 //顺序表的最大长度
-typedef struct  
+#include <stdio.h>
+#define MaxSize 100
+typedef struct
 {
-    int key; //关键子项
-    int otherinfo;//其他关键子项
-}EleType;
-typedef struct  
+    int key;   //关键子项
+    int other; //其他子项
+} elementType;
+typedef struct
 {
-    EleType R[MAXSIZE+1];//r[0]闲置或用作哨兵
-    int length;//顺序表的长度
-}SqList;
-void ListDisplay(SqList *L)
+    elementType *p;
+    int length; //顺序表的长度
+} sqList;
+void initSqlist(sqList s, int one)
 {
-    int i;
-    for (i = 0; i <L->length; i++)
+    printf("请依次输入%d个元素的值", one);
+    for (int i = 0; i < one; i++)
     {
-        printf("%d\t", L->R[i]);
+        scanf("%d", &s.p[i].key);
     }
-    printf("\n");
 }
-void search_SQ(SqList *L,int i){
-    //设置监视哨
-    L->R[0].key=i;
-    int j;
-    for (j = L->length-1; L->R[j].key!=i; j--);
-    if (j==0)
+void displaySqlist(sqList s)
+{
+    for (int i = 0; i < s.length; i++)
     {
-        printf("该元素没有");
-    }else printf("该元素的位置为%d\n",j);
-    
-    
-}
-int main(){
-      //顺序表的初始化
-     SqList L;
-    int i,m;
-    printf("请输入线性表La的长度：");//5
-    scanf("%d", &m);
-    L.length = m;
-    for ( i = 0; i < m; i++)
-    {
-        scanf("%d",&L.R[i].key);//0 38 23 2 39 3 
-        
+        printf("第%d元素的值为%d\n", i, s.p[i].key);
     }
-    printf("查找之前");
-    ListDisplay(&L);
-    search_SQ(&L,38);
-    return 0;
+}
+void search_Sq(sqList s, int one)
+{
+    for (int i = s.length - 1; i >= 0; i--)
+    {
+        if (one == s.p[i].key)
+        {
+            printf("找到了,i=%d\n", i);
+            return;
+        }
+    }
+    printf("没找到\n");
+    return;
+}
+void search_Seq(sqList s, int one)
+{
+    s.p[-1].key = one;
+    int i = -1;
+    for (i = s.length; i >= 0 && s.p[i].key != one; i--)
+        ;
+    printf("如果i!=-1就找到了i=%d", i);
+    return;
+}
+void main()
+{
+    sqList s;
+    printf("请输入线性表的长度\n");
+    scanf("%d", &s.length);
+    //进行初始化
+    initSqlist(s, s.length);
+    displaySqlist(s);
+    //从后往前的顺序查找
+    search_Sq(s, 5);  //不设置监视哨
+    search_Seq(s, 5); //设置监视哨
 }
