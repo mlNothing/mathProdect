@@ -24,6 +24,24 @@ void ListDisplay(SqList *L)
     }
     printf("\n");
 }
+// void InsertSort(SqList *L)
+// {
+//     int i,j;
+//     for ( i = 2; i < L->length; i++)
+//     {
+//         if (L->R[i].key<L->R[i-1].key)
+//         {
+//              L->R[0].key=L->R[i].key;
+//             L->R[i].key=L->R[i-1].key;
+//             for ( j = i-2; L->R[0].key<L->R[j].key; --j)
+//             {
+//                 L->R[j+1]=L->R[j];
+//             }
+//             L->R[j+1]=L->R[0];
+//         }  
+//     }
+    
+// }
 void InsertSort(SqList *L)
 {
     int i,j;
@@ -32,8 +50,7 @@ void InsertSort(SqList *L)
         if (L->R[i].key<L->R[i-1].key)
         {
              L->R[0].key=L->R[i].key;
-            L->R[i].key=L->R[i-1].key;
-            for ( j = i-2; L->R[0].key<L->R[j].key; --j)
+            for ( j = i-1; L->R[0].key<L->R[j].key; --j)
             {
                 L->R[j+1]=L->R[j];
             }
